@@ -109,6 +109,8 @@ mixer.music.play()
 money = mixer.Sound('money.ogg')
 kick = mixer.Sound('kick.ogg')
 
+# ...
+
 while game:
     for ev in event.get():
         if ev.type == QUIT:
@@ -130,7 +132,7 @@ while game:
         w5.draw_wall()
         w6.draw_wall()
         w7.draw_wall()
-    
+
     if (sprite.collide_rect(player, monster) or 
         sprite.collide_rect(player, w1) or 
         sprite.collide_rect(player, w2) or
@@ -142,6 +144,13 @@ while game:
         finish = True
         window.blit(lose, (200,200))
         kick.play()
+        
+        # Натисніть "Space" для рестарту
+        keys = key.get_pressed()
+        if keys[K_SPACE]:
+            finish = False
+            player.rect.x = 5
+            player.rect.y = win_height - 80
 
     if sprite.collide_rect(player, final) :
         finish = True
